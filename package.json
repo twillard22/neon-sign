@@ -1,9 +1,9 @@
 {
   "name": "neon-sign",
   "displayName": "Neon Sign",
-  "description": "Cyberpunk-bar dark theme — deep violet-black with vivid neon syntax. Hot pink keywords, electric green functions, violet types, cyan variables. Saturated and punchy, tuned not to burn your retinas.",
+  "description": "Cyberpunk-bar dark theme — two variants: vivid neons on near-black violet (neon-sign) and calmer softer palette on lifted plum (neon-sign-muted).",
   "publisher": "twillard22",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "license": "MIT",
   "engines": { "vscode": "^1.60.0" },
   "categories": ["Themes"],
@@ -18,6 +18,11 @@
         "label": "Neon Sign",
         "uiTheme": "vs-dark",
         "path": "./themes/neon-sign.json"
+      },
+      {
+        "label": "Neon Sign Muted",
+        "uiTheme": "vs-dark",
+        "path": "./themes/neon-sign-muted.json"
       }
     ]
   },

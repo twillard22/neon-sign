@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root {
+  :root, [data-variant="vivid"] {
     --bg-darkest: #08040f;
     --bg-main:    #0f0820;
     --bg-raised:  #170d2c;
@@ -32,15 +32,54 @@
     --warning:    #ffb547;
     --info:       #5ee2ff;
     --success:    #5dff8f;
+
+    --hero-glow:   rgba(255,61,138,0.55);
+    --hero-glow-2: rgba(255,61,138,0.25);
+    --page-grad-1: #1a0a30;
+    --page-grad-2: #200a35;
+    --page-bg:     #050308;
+  }
+  [data-variant="muted"] {
+    --bg-darkest: #161025;
+    --bg-main:    #1e1830;
+    --bg-raised:  #28203f;
+    --bg-tab:     #1a1428;
+    --bg-hl:      #3a2f55;
+    --bg-subtle:  #2a2245;
+    --border:     #3d3360;
+    --fg:         #d8cee8;
+    --fg-mid:     #b8a8d0;
+    --fg-dim:     #8a7ba8;
+    --line-nums:  #4d4275;
+
+    --keyword:    #e87aa8;
+    --function:   #8de0a5;
+    --type:       #b896d8;
+    --variable:   #8fcde0;
+    --string:     #e8c074;
+    --number:     #e89870;
+    --special:    #d090c8;
+
+    --error:      #e87a8a;
+    --warning:    #e8c074;
+    --info:       #8fcde0;
+    --success:    #8de0a5;
+
+    --hero-glow:   rgba(232,122,168,0.40);
+    --hero-glow-2: rgba(232,122,168,0.18);
+    --page-grad-1: #2a2045;
+    --page-grad-2: #2d2148;
+    --page-bg:     #110c1f;
   }
 
   * { box-sizing: border-box; }
   html, body { margin: 0; padding: 0; }
   body {
     background:
-      radial-gradient(ellipse at 20% 0%, #1a0a30 0%, transparent 50%),
-      radial-gradient(ellipse at 80% 100%, #200a35 0%, transparent 55%),
-      #050308;
+      radial-gradient(ellipse at 20% 0%, var(--page-grad-1) 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 100%, var(--page-grad-2) 0%, transparent 55%),
+      var(--page-bg);
+    transition: background 0.25s ease;
     color: var(--fg);
     font-family: 'Inter', system-ui, sans-serif;
     min-height: 100vh;
@@ -78,8 +117,8 @@
     color: #fff;
     text-shadow:
       0 0 8px var(--keyword),
-      0 0 24px rgba(255,61,138,0.55),
-      0 0 64px rgba(255,61,138,0.25);
+      0 0 24px var(--hero-glow),
+      0 0 64px var(--hero-glow-2);
   }
   .brand .sub {
     color: var(--fg-mid);
@@ -527,9 +566,67 @@
   .diff-block .ln.rem { background: rgba(255,77,109,0.08); color: var(--error); }
   .diff-block .ln.ctx { color: var(--fg-mid); }
   .diff-block .ln.hd  { color: var(--type); }
+
+  /* Variant toggle */
+  .variant-toggle {
+    position: fixed;
+    top: 18px;
+    right: 18px;
+    z-index: 50;
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 8px 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: 'JetBrains Mono', monospace;
+    box-shadow: 0 12px 30px -10px rgba(0,0,0,0.6);
+  }
+  .vt-label {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--fg-dim);
+  }
+  .vt-pills { display: flex; gap: 4px; }
+  .vt-pill {
+    font-family: inherit;
+    font-size: 11px;
+    color: var(--fg-mid);
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  .vt-pill:hover { color: var(--fg); background: var(--bg-hl); }
+  .vt-pill.active {
+    background: var(--keyword);
+    color: var(--bg-darkest);
+    border-color: var(--keyword);
+    font-weight: 600;
+  }
 </style>
 </head>
-<body>
+<body data-variant="vivid">
+
+<div class="variant-toggle">
+  <div class="vt-label">variant</div>
+  <div class="vt-pills">
+    <button class="vt-pill active" data-set="vivid">neon-sign</button>
+    <button class="vt-pill" data-set="muted">neon-sign-muted</button>
+  </div>
+</div>
+<script>
+  document.querySelectorAll('.vt-pill').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const v = btn.dataset.set;
+      document.body.dataset.variant = v;
+      document.querySelectorAll('.vt-pill').forEach(b => b.classList.toggle('active', b === btn));
+    });
+  });
+</script>
 
 <div class="hero">
   <div class="brand">
