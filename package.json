@@ -1,0 +1,32 @@
+{
+  "name": "neon-sign",
+  "displayName": "Neon Sign",
+  "description": "Cyberpunk-bar dark theme — deep violet-black with vivid neon syntax. Hot pink keywords, electric green functions, violet types, cyan variables. Saturated and punchy, tuned not to burn your retinas.",
+  "publisher": "twillard22",
+  "version": "1.0.0",
+  "license": "MIT",
+  "engines": { "vscode": "^1.60.0" },
+  "categories": ["Themes"],
+  "keywords": ["theme", "dark", "neon", "cyberpunk", "syntax highlighting"],
+  "galleryBanner": {
+    "color": "#0f0820",
+    "theme": "dark"
+  },
+  "contributes": {
+    "themes": [
+      {
+        "label": "Neon Sign",
+        "uiTheme": "vs-dark",
+        "path": "./themes/neon-sign.json"
+      }
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/twillard22/neon-sign"
+  },
+  "homepage": "https://twillard22.github.io/neon-sign/",
+  "bugs": {
+    "url": "https://github.com/twillard22/neon-sign/issues"
+  }
+}

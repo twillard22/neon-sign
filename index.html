@@ -1,0 +1,751 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Neon Sign — Theme Preview</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-darkest: #08040f;
+    --bg-main:    #0f0820;
+    --bg-raised:  #170d2c;
+    --bg-tab:     #0a0518;
+    --bg-hl:      #2a1a4a;
+    --bg-subtle:  #1c1136;
+    --border:     #2d1f4d;
+    --fg:         #e0d4f5;
+    --fg-mid:     #c8b8e0;
+    --fg-dim:     #6b5a8a;
+    --line-nums:  #3a2960;
+
+    --keyword:    #ff3d8a;
+    --function:   #5dff8f;
+    --type:       #b266ff;
+    --variable:   #5ee2ff;
+    --string:     #ffb547;
+    --number:     #ff7a3d;
+    --special:    #ff5edb;
+
+    --error:      #ff4d6d;
+    --warning:    #ffb547;
+    --info:       #5ee2ff;
+    --success:    #5dff8f;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background:
+      radial-gradient(ellipse at 20% 0%, #1a0a30 0%, transparent 50%),
+      radial-gradient(ellipse at 80% 100%, #200a35 0%, transparent 55%),
+      #050308;
+    color: var(--fg);
+    font-family: 'Inter', system-ui, sans-serif;
+    min-height: 100vh;
+    padding: 32px 28px 80px;
+  }
+
+  /* Title strip */
+  .hero {
+    max-width: 1380px;
+    margin: 0 auto 28px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .brand {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .brand .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--fg-dim);
+  }
+  .brand h1 {
+    margin: 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 56px;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    color: #fff;
+    text-shadow:
+      0 0 8px var(--keyword),
+      0 0 24px rgba(255,61,138,0.55),
+      0 0 64px rgba(255,61,138,0.25);
+  }
+  .brand .sub {
+    color: var(--fg-mid);
+    font-size: 14px;
+    max-width: 540px;
+    line-height: 1.45;
+  }
+  .meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--fg-dim);
+    text-align: right;
+    line-height: 1.7;
+  }
+  .meta strong { color: var(--fg-mid); font-weight: 500; }
+
+  /* Grid */
+  .grid {
+    max-width: 1380px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    grid-template-rows: auto auto;
+    gap: 22px;
+  }
+
+  /* Window chrome */
+  .window {
+    background: var(--bg-main);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow:
+      0 0 0 1px rgba(255,61,138,0.04),
+      0 30px 80px -20px rgba(0,0,0,0.7),
+      0 0 60px -15px rgba(178, 102, 255, 0.2);
+  }
+  .titlebar {
+    background: var(--bg-darkest);
+    border-bottom: 1px solid var(--border);
+    height: 36px;
+    display: flex;
+    align-items: center;
+    padding: 0 14px;
+    gap: 8px;
+  }
+  .dots { display: flex; gap: 7px; }
+  .dot { width: 12px; height: 12px; border-radius: 50%; }
+  .dot.r { background: #ff4d6d; }
+  .dot.y { background: #ffb547; }
+  .dot.g { background: #5dff8f; }
+  .titlebar .title {
+    flex: 1;
+    text-align: center;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--fg-dim);
+    letter-spacing: 0.06em;
+  }
+
+  /* Editor window */
+  .editor-window { grid-column: 1; grid-row: 1; }
+  .editor-body {
+    display: grid;
+    grid-template-columns: 48px 220px minmax(0, 1fr);
+    min-height: 620px;
+  }
+  .activity {
+    background: var(--bg-darkest);
+    border-right: 1px solid var(--border);
+    padding: 14px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 18px;
+    color: var(--fg-dim);
+  }
+  .activity .item {
+    width: 32px; height: 32px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 6px;
+    position: relative;
+  }
+  .activity .item.active {
+    color: var(--fg);
+    background: var(--bg-raised);
+  }
+  .activity .item.active::before {
+    content: '';
+    position: absolute;
+    left: -16px;
+    top: 4px; bottom: 4px;
+    width: 2px;
+    background: var(--keyword);
+    box-shadow: 0 0 10px var(--keyword);
+  }
+  .activity .badge {
+    position: absolute;
+    bottom: -2px; right: -2px;
+    background: var(--keyword);
+    color: var(--bg-darkest);
+    font-family: 'Inter', sans-serif;
+    font-weight: 700;
+    font-size: 9px;
+    width: 14px; height: 14px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  .sidebar {
+    background: var(--bg-tab);
+    border-right: 1px solid var(--border);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    color: var(--fg-mid);
+    padding: 12px 0;
+  }
+  .sidebar .section-header {
+    color: var(--fg-mid);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 10px;
+    padding: 6px 14px;
+  }
+  .sidebar .file-tree { display: flex; flex-direction: column; }
+  .sidebar .entry {
+    padding: 3px 14px 3px 28px;
+    display: flex; align-items: center; gap: 6px;
+    position: relative;
+    cursor: default;
+  }
+  .sidebar .entry.folder { padding-left: 14px; }
+  .sidebar .entry.folder::before { content: '▾'; color: var(--fg-dim); font-size: 9px; margin-right: 2px; }
+  .sidebar .entry.folder.closed::before { content: '▸'; }
+  .sidebar .entry .name { color: var(--fg-mid); }
+  .sidebar .entry.mod .name { color: var(--info); }
+  .sidebar .entry.add .name { color: var(--success); }
+  .sidebar .entry.del .name { color: var(--error); }
+  .sidebar .entry.untrack .name { color: var(--warning); }
+  .sidebar .entry.active { background: var(--bg-hl); }
+  .sidebar .entry.active .name { color: #fff; }
+  .sidebar .entry .gitchar { margin-left: auto; font-size: 10px; }
+  .sidebar .entry.mod .gitchar { color: var(--info); }
+  .sidebar .entry.add .gitchar { color: var(--success); }
+  .sidebar .entry.del .gitchar { color: var(--error); }
+  .sidebar .entry.untrack .gitchar { color: var(--warning); }
+
+  .editor {
+    background: var(--bg-main);
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+  .tabs {
+    background: var(--bg-tab);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+  }
+  .tab {
+    padding: 8px 16px;
+    color: var(--fg-dim);
+    border-right: 1px solid var(--border);
+    background: var(--bg-tab);
+    position: relative;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .tab.active {
+    background: var(--bg-main);
+    color: var(--fg);
+  }
+  .tab.active::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1.5px;
+    background: var(--keyword);
+    box-shadow: 0 0 8px var(--keyword);
+  }
+  .tab .closer { color: var(--fg-dim); font-size: 14px; line-height: 1; }
+  .tab.dirty .closer::before { content: '●'; color: var(--special); }
+
+  .breadcrumb {
+    padding: 6px 16px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--fg-dim);
+    background: var(--bg-main);
+    border-bottom: 1px solid var(--border);
+    display: flex; gap: 6px; align-items: center;
+  }
+  .breadcrumb .crumb-active { color: var(--special); }
+
+  .code {
+    flex: 1;
+    padding: 14px 0 14px 0;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 1.65;
+    overflow: auto;
+  }
+  .code .ln {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    padding: 0 16px 0 0;
+  }
+  .code .ln .gutter {
+    text-align: right;
+    padding-right: 16px;
+    color: var(--line-nums);
+    user-select: none;
+  }
+  .code .ln.cursor { background: var(--bg-subtle); }
+  .code .ln.cursor .gutter { color: var(--keyword); }
+  .code .ln.added { background: rgba(93,255,143,0.07); }
+  .code .ln.added .gutter { color: var(--success); }
+  .code .ln.added .gutter::before { content: '+'; margin-right: 4px; color: var(--success); }
+  .code .ln.removed { background: rgba(255,77,109,0.07); }
+  .code .ln.removed .gutter::before { content: '−'; margin-right: 4px; color: var(--error); }
+  .code .ln.error-line .content { border-bottom: 1px dotted var(--error); padding-bottom: 0; }
+  .code .ln .content { min-width: 0; white-space: pre; }
+
+  /* Syntax tokens */
+  .t-comment { color: var(--fg-dim); font-style: italic; }
+  .t-keyword { color: var(--keyword); }
+  .t-storage { color: var(--keyword); }
+  .t-function { color: var(--function); }
+  .t-type { color: var(--type); }
+  .t-type-i { color: var(--type); font-style: italic; }
+  .t-var { color: var(--variable); }
+  .t-param { color: var(--string); font-style: italic; }
+  .t-string { color: var(--string); }
+  .t-number { color: var(--number); }
+  .t-bool { color: var(--number); }
+  .t-special { color: var(--special); }
+  .t-special-i { color: var(--special); font-style: italic; }
+  .t-operator { color: var(--special); }
+  .t-punct { color: var(--fg-dim); }
+  .t-fg { color: var(--fg); }
+  .t-prop { color: var(--variable); }
+  .t-tag { color: var(--keyword); }
+  .t-attr { color: var(--function); font-style: italic; }
+  .t-this { color: var(--special); font-style: italic; }
+
+  /* Status bar */
+  .statusbar {
+    background: var(--bg-darkest);
+    border-top: 1px solid var(--border);
+    color: var(--fg-mid);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    height: 26px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 0 14px;
+  }
+  .statusbar .pill {
+    display: inline-flex; align-items: center; gap: 5px;
+  }
+  .statusbar .branch { color: var(--special); }
+  .statusbar .err { color: var(--error); }
+  .statusbar .warn { color: var(--warning); }
+  .statusbar .spacer { flex: 1; }
+  .statusbar .remote {
+    background: var(--keyword);
+    color: var(--bg-darkest);
+    padding: 0 8px;
+    height: 26px;
+    margin: 0 -14px 0 0;
+    display: flex; align-items: center;
+    font-weight: 600;
+  }
+
+  /* Terminal */
+  .terminal-window { grid-column: 1; grid-row: 2; }
+  .terminal-body {
+    background: var(--bg-darkest);
+    padding: 18px 22px 22px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 1.6;
+    color: var(--fg);
+    min-height: 280px;
+  }
+  .terminal-body .line { white-space: pre-wrap; word-break: break-word; }
+  .term-user { color: var(--keyword); font-weight: 600; }
+  .term-host { color: var(--type); font-weight: 600; }
+  .term-dir  { color: var(--variable); font-weight: 600; }
+  .term-git  { color: var(--special); font-weight: 600; }
+  .term-gitstatus { color: var(--warning); }
+  .term-node { color: var(--function); }
+  .term-time { color: var(--fg-dim); }
+  .term-prompt-ok { color: var(--success); font-weight: 600; }
+  .term-prompt-err { color: var(--error); font-weight: 600; }
+  .term-cmd { color: var(--function); }
+  .term-builtin { color: var(--type); }
+  .term-reserved { color: var(--keyword); }
+  .term-flag { color: var(--variable); }
+  .term-str { color: var(--string); }
+  .term-path { color: var(--fg); text-decoration: underline; text-decoration-color: var(--border); }
+  .term-sep { color: var(--keyword); text-decoration: underline; text-decoration-color: var(--border); }
+  .term-suggest { color: var(--fg-dim); }
+  .term-comment { color: var(--fg-dim); font-style: italic; }
+  .term-out { color: var(--fg-mid); }
+  .term-err-out { color: var(--error); }
+  .term-warn-out { color: var(--warning); }
+  .term-ok-out { color: var(--success); }
+  .term-cursor {
+    display: inline-block;
+    width: 8px; height: 1em;
+    vertical-align: text-bottom;
+    background: var(--special);
+    box-shadow: 0 0 6px var(--special);
+    animation: blink 1s steps(2, end) infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* Right column */
+  .right-col {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    min-width: 0;
+  }
+  .panel {
+    background: var(--bg-main);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px;
+    box-shadow: 0 20px 50px -20px rgba(0,0,0,0.6);
+  }
+  .panel h3 {
+    margin: 0 0 14px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--fg-dim);
+    font-weight: 500;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .panel h3::before {
+    content: '';
+    width: 6px; height: 6px;
+    background: var(--keyword);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--keyword);
+  }
+
+  .swatches { display: flex; flex-direction: column; gap: 6px; }
+  .swatch {
+    display: grid;
+    grid-template-columns: 28px 1fr auto;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 8px;
+    background: var(--bg-tab);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+  }
+  .swatch .chip {
+    width: 24px; height: 24px;
+    border-radius: 5px;
+    border: 1px solid rgba(255,255,255,0.06);
+  }
+  .swatch .label { color: var(--fg); }
+  .swatch .label .role { display: block; color: var(--fg-dim); font-size: 9px; letter-spacing: 0.1em; text-transform: uppercase; margin-top: 1px; }
+  .swatch .hex { color: var(--fg-dim); font-size: 11px; }
+
+  .swatch.glow .chip { box-shadow: 0 0 10px currentColor; }
+
+  /* Notification preview */
+  .notif {
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--keyword);
+    border-radius: 6px;
+    padding: 10px 12px;
+    font-size: 12px;
+    color: var(--fg);
+    margin-bottom: 8px;
+  }
+  .notif.err  { border-left-color: var(--error); }
+  .notif.warn { border-left-color: var(--warning); }
+  .notif.info { border-left-color: var(--info); }
+  .notif .title {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    color: var(--fg-dim);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 2px;
+  }
+  .notif.err .title { color: var(--error); }
+  .notif.warn .title { color: var(--warning); }
+  .notif.info .title { color: var(--info); }
+
+  /* UI controls */
+  .ui-row { display: flex; gap: 10px; margin-bottom: 10px; flex-wrap: wrap; }
+  .btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+  }
+  .btn-primary { background: var(--keyword); color: var(--bg-darkest); }
+  .btn-secondary { background: var(--bg-hl); color: var(--fg); }
+  .badge-ui {
+    background: var(--keyword);
+    color: var(--bg-darkest);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 10px;
+  }
+  .input-ui {
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    color: var(--fg);
+    padding: 7px 10px;
+    border-radius: 5px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    width: 100%;
+    outline: none;
+  }
+  .input-ui:focus { border-color: var(--keyword); box-shadow: 0 0 0 2px rgba(255,61,138,0.2); }
+
+  /* Diff block */
+  .diff-block { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; line-height: 1.7; }
+  .diff-block .ln { padding: 0 8px; white-space: pre; }
+  .diff-block .ln.add { background: rgba(93,255,143,0.08); color: var(--success); }
+  .diff-block .ln.rem { background: rgba(255,77,109,0.08); color: var(--error); }
+  .diff-block .ln.ctx { color: var(--fg-mid); }
+  .diff-block .ln.hd  { color: var(--type); }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="brand">
+    <div class="eyebrow">/* twillard22 / dotfiles */</div>
+    <h1>NEON&nbsp;SIGN</h1>
+    <div class="sub">A cyberpunk-bar color theme for VS&nbsp;Code, Ghostty, Starship and zsh. Vivid syntax neons against a deep violet-black — saturated, but tuned not to burn your retinas.</div>
+  </div>
+  <div class="meta">
+    <div><strong>theme</strong> neon-sign</div>
+    <div><strong>files</strong> 6 generated</div>
+    <div><strong>type</strong> dark · semantic</div>
+    <div><strong>contrast</strong> AA on fg/bg</div>
+  </div>
+</div>
+
+<div class="grid">
+
+  <!-- ───── VS CODE WINDOW ───── -->
+  <div class="window editor-window">
+    <div class="titlebar">
+      <div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+      <div class="title">neon-sign — dotfiles — Visual Studio Code</div>
+      <div style="width:54px"></div>
+    </div>
+
+    <div class="editor-body">
+      <!-- activity bar -->
+      <div class="activity">
+        <div class="item active">📁<span class="badge">3</span></div>
+        <div class="item">🔍</div>
+        <div class="item">⎇</div>
+        <div class="item">▷</div>
+        <div class="item">⚙</div>
+      </div>
+
+      <!-- sidebar -->
+      <div class="sidebar">
+        <div class="section-header">Explorer</div>
+        <div class="file-tree">
+          <div class="entry folder"><span class="name">vscode-themes</span></div>
+          <div class="entry folder" style="padding-left: 24px;"><span class="name">neon-sign</span></div>
+          <div class="entry mod" style="padding-left: 42px;"><span class="name">package.json</span><span class="gitchar">M</span></div>
+          <div class="entry active mod" style="padding-left: 42px;"><span class="name">themes/neon-sign.json</span><span class="gitchar">M</span></div>
+          <div class="entry folder closed" style="padding-left: 14px;"><span class="name">ghostty</span></div>
+          <div class="entry folder closed" style="padding-left: 14px;"><span class="name">starship</span></div>
+          <div class="entry folder" style="padding-left: 14px;"><span class="name">themes</span></div>
+          <div class="entry add" style="padding-left: 42px;"><span class="name">neon-sign/zsh-highlights.zsh</span><span class="gitchar">A</span></div>
+          <div class="entry add" style="padding-left: 42px;"><span class="name">neon-sign/zsh-autosuggest.zsh</span><span class="gitchar">A</span></div>
+          <div class="entry"><span class="name" style="padding-left:14px">.gitignore</span></div>
+          <div class="entry untrack"><span class="name" style="padding-left:14px">notes.md</span><span class="gitchar">U</span></div>
+          <div class="entry del"><span class="name" style="padding-left:14px">old-theme.json</span><span class="gitchar">D</span></div>
+        </div>
+      </div>
+
+      <!-- editor -->
+      <div class="editor">
+        <div class="tabs">
+          <div class="tab active dirty"><span>theme.ts</span><span class="closer"></span></div>
+          <div class="tab"><span>palette.py</span><span class="closer">×</span></div>
+          <div class="tab"><span>App.tsx</span><span class="closer">×</span></div>
+          <div class="tab"><span>tokens.css</span><span class="closer">×</span></div>
+        </div>
+        <div class="breadcrumb">
+          <span>src</span><span>›</span><span>theme</span><span>›</span><span class="crumb-active">theme.ts</span>
+        </div>
+
+        <div class="code">
+<div class="ln"><div class="gutter">1</div><div class="content"><span class="t-comment">// Neon Sign — palette + syntax mapping. Saturated, but tuned.</span></div></div>
+<div class="ln"><div class="gutter">2</div><div class="content"><span class="t-keyword">import</span> <span class="t-punct">{</span> <span class="t-var">readFileSync</span> <span class="t-punct">}</span> <span class="t-keyword">from</span> <span class="t-string">"node:fs"</span><span class="t-operator">;</span></div></div>
+<div class="ln"><div class="gutter">3</div><div class="content"><span class="t-keyword">import</span> <span class="t-keyword">type</span> <span class="t-punct">{</span> <span class="t-type">ColorTheme</span><span class="t-operator">,</span> <span class="t-type">SyntaxScope</span> <span class="t-punct">}</span> <span class="t-keyword">from</span> <span class="t-string">"./types"</span><span class="t-operator">;</span></div></div>
+<div class="ln"><div class="gutter">4</div><div class="content"></div></div>
+<div class="ln"><div class="gutter">5</div><div class="content"><span class="t-keyword">export</span> <span class="t-keyword">const</span> <span class="t-var">NEON_SIGN</span><span class="t-operator">:</span> <span class="t-type">ColorTheme</span> <span class="t-operator">=</span> <span class="t-punct">{</span></div></div>
+<div class="ln"><div class="gutter">6</div><div class="content">  <span class="t-prop">name</span><span class="t-operator">:</span> <span class="t-string">"Neon Sign"</span><span class="t-operator">,</span></div></div>
+<div class="ln"><div class="gutter">7</div><div class="content">  <span class="t-prop">type</span><span class="t-operator">:</span> <span class="t-string">"dark"</span><span class="t-operator">,</span></div></div>
+<div class="ln"><div class="gutter">8</div><div class="content">  <span class="t-prop">semanticHighlighting</span><span class="t-operator">:</span> <span class="t-bool">true</span><span class="t-operator">,</span></div></div>
+<div class="ln"><div class="gutter">9</div><div class="content">  <span class="t-prop">palette</span><span class="t-operator">:</span> <span class="t-punct">{</span></div></div>
+<div class="ln cursor"><div class="gutter">10</div><div class="content">    <span class="t-prop">bgMain</span><span class="t-operator">:</span> <span class="t-string">"#0f0820"</span><span class="t-operator">,</span>  <span class="t-comment">// editor background</span></div></div>
+<div class="ln"><div class="gutter">11</div><div class="content">    <span class="t-prop">keyword</span><span class="t-operator">:</span> <span class="t-string">"#ff3d8a"</span><span class="t-operator">,</span> <span class="t-comment">// hot pink — keywords + flow</span></div></div>
+<div class="ln"><div class="gutter">12</div><div class="content">    <span class="t-prop">function</span><span class="t-operator">:</span> <span class="t-string">"#5dff8f"</span><span class="t-operator">,</span><span class="t-comment">// electric green — fns + methods</span></div></div>
+<div class="ln"><div class="gutter">13</div><div class="content">    <span class="t-prop">type</span><span class="t-operator">:</span> <span class="t-string">"#b266ff"</span><span class="t-operator">,</span>    <span class="t-comment">// violet — classes + interfaces</span></div></div>
+<div class="ln"><div class="gutter">14</div><div class="content">    <span class="t-prop">variable</span><span class="t-operator">:</span> <span class="t-string">"#5ee2ff"</span><span class="t-operator">,</span><span class="t-comment">// cyan — vars + properties</span></div></div>
+<div class="ln"><div class="gutter">15</div><div class="content">    <span class="t-prop">string</span><span class="t-operator">:</span> <span class="t-string">"#ffb547"</span><span class="t-operator">,</span>  <span class="t-comment">// amber — strings</span></div></div>
+<div class="ln"><div class="gutter">16</div><div class="content">  <span class="t-punct">}</span> <span class="t-keyword">satisfies</span> <span class="t-type">Record</span><span class="t-operator">&lt;</span><span class="t-type">SyntaxScope</span><span class="t-operator">,</span> <span class="t-type">string</span><span class="t-operator">&gt;</span><span class="t-operator">,</span></div></div>
+<div class="ln"><div class="gutter">17</div><div class="content"><span class="t-punct">}</span><span class="t-operator">;</span></div></div>
+<div class="ln"><div class="gutter">18</div><div class="content"></div></div>
+<div class="ln"><div class="gutter">19</div><div class="content"><span class="t-comment">/** Re-emit a theme JSON with all UI keys filled in. */</span></div></div>
+<div class="ln"><div class="gutter">20</div><div class="content"><span class="t-keyword">export</span> <span class="t-keyword">async</span> <span class="t-keyword">function</span> <span class="t-function">buildTheme</span><span class="t-punct">(</span><span class="t-param">input</span><span class="t-operator">:</span> <span class="t-type">string</span><span class="t-punct">)</span><span class="t-operator">:</span> <span class="t-type">Promise</span><span class="t-operator">&lt;</span><span class="t-type">ColorTheme</span><span class="t-operator">&gt;</span> <span class="t-punct">{</span></div></div>
+<div class="ln"><div class="gutter">21</div><div class="content">  <span class="t-keyword">const</span> <span class="t-var">raw</span> <span class="t-operator">=</span> <span class="t-function">readFileSync</span><span class="t-punct">(</span><span class="t-var">input</span><span class="t-operator">,</span> <span class="t-string">"utf8"</span><span class="t-punct">)</span><span class="t-operator">;</span></div></div>
+<div class="ln"><div class="gutter">22</div><div class="content">  <span class="t-keyword">const</span> <span class="t-var">parsed</span> <span class="t-operator">=</span> <span class="t-type">JSON</span><span class="t-operator">.</span><span class="t-function">parse</span><span class="t-punct">(</span><span class="t-var">raw</span><span class="t-punct">)</span> <span class="t-keyword">as</span> <span class="t-type">ColorTheme</span><span class="t-operator">;</span></div></div>
+<div class="ln"><div class="gutter">23</div><div class="content">  <span class="t-keyword">if</span> <span class="t-punct">(</span><span class="t-operator">!</span><span class="t-var">parsed</span><span class="t-operator">.</span><span class="t-prop">palette</span><span class="t-punct">)</span> <span class="t-keyword">throw</span> <span class="t-keyword">new</span> <span class="t-type">Error</span><span class="t-punct">(</span><span class="t-string">`missing palette in </span><span class="t-special">${</span><span class="t-var">input</span><span class="t-special">}</span><span class="t-string">`</span><span class="t-punct">)</span><span class="t-operator">;</span></div></div>
+<div class="ln error-line"><div class="gutter">24</div><div class="content">  <span class="t-keyword">return</span> <span class="t-this">this</span><span class="t-operator">.</span><span class="t-function">hydrate</span><span class="t-punct">(</span><span class="t-var">parsed</span><span class="t-operator">,</span> <span class="t-punct">{</span> <span class="t-prop">strict</span><span class="t-operator">:</span> <span class="t-bool">true</span><span class="t-operator">,</span> <span class="t-prop">version</span><span class="t-operator">:</span> <span class="t-number">1</span> <span class="t-punct">}</span><span class="t-punct">)</span><span class="t-operator">;</span></div></div>
+<div class="ln"><div class="gutter">25</div><div class="content"><span class="t-punct">}</span></div></div>
+<div class="ln"><div class="gutter">26</div><div class="content"></div></div>
+<div class="ln added"><div class="gutter">27</div><div class="content"><span class="t-special-i">@decorator</span><span class="t-punct">(</span><span class="t-punct">{</span> <span class="t-prop">tag</span><span class="t-operator">:</span> <span class="t-string">"neon"</span> <span class="t-punct">}</span><span class="t-punct">)</span></div></div>
+<div class="ln added"><div class="gutter">28</div><div class="content"><span class="t-keyword">class</span> <span class="t-type">Glow</span> <span class="t-keyword">extends</span> <span class="t-type">Effect</span> <span class="t-punct">{</span> <span class="t-prop">radius</span> <span class="t-operator">=</span> <span class="t-number">24</span><span class="t-operator">;</span> <span class="t-punct">}</span></div></div>
+<div class="ln removed"><div class="gutter"> </div><div class="content"><span class="t-comment">// TODO: drop magenta from operator scope — too noisy on Python</span></div></div>
+        </div>
+
+        <div class="statusbar">
+          <span class="pill branch"> main</span>
+          <span class="pill"><span style="color:var(--success)">✓</span> 0</span>
+          <span class="pill err">● 1</span>
+          <span class="pill warn">▲ 3</span>
+          <span class="pill">TypeScript</span>
+          <span class="pill">UTF-8</span>
+          <span class="pill">LF</span>
+          <span class="spacer"></span>
+          <span class="pill">Ln 24, Col 18</span>
+          <span class="pill">Spaces: 2</span>
+          <span class="remote">⬢ neon-sign</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ───── TERMINAL WINDOW ───── -->
+  <div class="window terminal-window">
+    <div class="titlebar">
+      <div class="dots"><span class="dot r"></span><span class="dot y"></span><span class="dot g"></span></div>
+      <div class="title">ghostty — zsh + starship — neon-sign</div>
+      <div style="width:54px"></div>
+    </div>
+    <div class="terminal-body">
+      <div class="line"><span class="term-user">twillard22</span> <span class="term-time">in</span> <span class="term-host"> mbp</span> <span class="term-time">at</span> <span class="term-dir"> ~/dotfiles</span> <span class="term-git"> main</span> <span class="term-gitstatus">[!?]</span> <span class="term-node"> v20.11.1</span> <span class="term-time">14:08:23</span></div>
+      <div class="line"><span class="term-prompt-ok">❯</span> <span class="term-cmd">theme-switch</span> <span class="term-str">neon-sign</span></div>
+      <div class="line"><span class="term-ok-out">✓</span> <span class="term-out">Ghostty theme → neon-sign</span></div>
+      <div class="line"><span class="term-ok-out">✓</span> <span class="term-out">VS Code theme → Neon Sign</span></div>
+      <div class="line"><span class="term-ok-out">✓</span> <span class="term-out">Starship config → starship/neon-sign.toml</span></div>
+      <div class="line">&nbsp;</div>
+      <div class="line"><span class="term-user">twillard22</span> <span class="term-time">in</span> <span class="term-host"> mbp</span> <span class="term-time">at</span> <span class="term-dir"> ~/dotfiles</span> <span class="term-git"> main</span> <span class="term-time">14:08:25</span></div>
+      <div class="line"><span class="term-prompt-ok">❯</span> <span class="term-reserved">for</span> f <span class="term-reserved">in</span> themes<span class="term-sep">/</span><span class="term-path">neon-sign</span><span class="term-sep">/</span>*<span class="term-flag">.zsh</span><span class="term-reserved">;</span> <span class="term-reserved">do</span> <span class="term-builtin">echo</span> <span class="term-str">"sourcing $f"</span><span class="term-reserved">;</span> <span class="term-builtin">source</span> <span class="term-str">"$f"</span><span class="term-reserved">;</span> <span class="term-reserved">done</span></div>
+      <div class="line"><span class="term-out">sourcing themes/neon-sign/zsh-autosuggest.zsh</span></div>
+      <div class="line"><span class="term-out">sourcing themes/neon-sign/zsh-highlights.zsh</span></div>
+      <div class="line">&nbsp;</div>
+      <div class="line"><span class="term-user">twillard22</span> <span class="term-time">in</span> <span class="term-host"> mbp</span> <span class="term-time">at</span> <span class="term-dir"> ~/dotfiles</span> <span class="term-git"> main</span> <span class="term-time">14:08:26</span></div>
+      <div class="line"><span class="term-prompt-err">❯</span> <span class="term-cmd">vsce</span> <span class="term-cmd">package</span> <span class="term-flag">--allow-missing-repository</span></div>
+      <div class="line"><span class="term-err-out">ERROR  Make sure to edit the README.md file before publishing your extension.</span></div>
+      <div class="line">&nbsp;</div>
+      <div class="line"><span class="term-user">twillard22</span> <span class="term-time">in</span> <span class="term-host"> mbp</span> <span class="term-time">at</span> <span class="term-dir"> ~/dotfiles</span> <span class="term-git"> main</span> <span class="term-time">14:08:28</span></div>
+      <div class="line"><span class="term-prompt-ok">❯</span> <span class="term-cmd">git</span> <span class="term-cmd">commit</span> <span class="term-flag">-m</span> <span class="term-str">"theme: add neon-sign"</span><span class="term-cursor"></span><span class="term-suggest">  --no-verify   # last suggestion</span></div>
+    </div>
+  </div>
+
+  <!-- ───── RIGHT COLUMN ───── -->
+  <div class="right-col">
+
+    <div class="panel">
+      <h3>Syntax palette</h3>
+      <div class="swatches">
+        <div class="swatch glow" style="color:#ff3d8a"><span class="chip" style="background:#ff3d8a"></span><span class="label">keyword<span class="role">control · storage · tag</span></span><span class="hex">#ff3d8a</span></div>
+        <div class="swatch glow" style="color:#5dff8f"><span class="chip" style="background:#5dff8f"></span><span class="label">function<span class="role">fns · methods · aliases</span></span><span class="hex">#5dff8f</span></div>
+        <div class="swatch glow" style="color:#b266ff"><span class="chip" style="background:#b266ff"></span><span class="label">type<span class="role">class · interface · enum</span></span><span class="hex">#b266ff</span></div>
+        <div class="swatch glow" style="color:#5ee2ff"><span class="chip" style="background:#5ee2ff"></span><span class="label">variable<span class="role">vars · properties · keys</span></span><span class="hex">#5ee2ff</span></div>
+        <div class="swatch glow" style="color:#ffb547"><span class="chip" style="background:#ffb547"></span><span class="label">string<span class="role">quoted · regex literal</span></span><span class="hex">#ffb547</span></div>
+        <div class="swatch glow" style="color:#ff7a3d"><span class="chip" style="background:#ff7a3d"></span><span class="label">number<span class="role">numeric · bool · null</span></span><span class="hex">#ff7a3d</span></div>
+        <div class="swatch glow" style="color:#ff5edb"><span class="chip" style="background:#ff5edb"></span><span class="label">special<span class="role">macro · decorator · this</span></span><span class="hex">#ff5edb</span></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3>Surfaces &amp; chrome</h3>
+      <div class="swatches">
+        <div class="swatch"><span class="chip" style="background:#08040f"></span><span class="label">bg_darkest<span class="role">title · terminal · activity</span></span><span class="hex">#08040f</span></div>
+        <div class="swatch"><span class="chip" style="background:#0f0820"></span><span class="label">bg_main<span class="role">editor</span></span><span class="hex">#0f0820</span></div>
+        <div class="swatch"><span class="chip" style="background:#170d2c"></span><span class="label">bg_raised<span class="role">menus · inputs · widgets</span></span><span class="hex">#170d2c</span></div>
+        <div class="swatch"><span class="chip" style="background:#2a1a4a"></span><span class="label">bg_highlight<span class="role">selection · line · active</span></span><span class="hex">#2a1a4a</span></div>
+        <div class="swatch"><span class="chip" style="background:#1c1136"></span><span class="label">bg_subtle<span class="role">word match · indent</span></span><span class="hex">#1c1136</span></div>
+        <div class="swatch"><span class="chip" style="background:#2d1f4d"></span><span class="label">border<span class="role">separators · gutters</span></span><span class="hex">#2d1f4d</span></div>
+        <div class="swatch"><span class="chip" style="background:#e0d4f5"></span><span class="label">fg<span class="role">default text</span></span><span class="hex">#e0d4f5</span></div>
+        <div class="swatch"><span class="chip" style="background:#6b5a8a"></span><span class="label">fg_dim<span class="role">comments · inactive</span></span><span class="hex">#6b5a8a</span></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3>Diagnostics &amp; git</h3>
+      <div class="notif err">
+        <div class="title">Error · tsc(2339)</div>
+        Property <code>hydrate</code> does not exist on type <code>this</code>.
+      </div>
+      <div class="notif warn">
+        <div class="title">Warning · eslint</div>
+        Unexpected console statement <code>no-console</code>.
+      </div>
+      <div class="notif info">
+        <div class="title">Info · git</div>
+        2 files modified on <code>main</code>, 2 added.
+      </div>
+      <div class="diff-block" style="margin-top:10px; background:var(--bg-tab); border:1px solid var(--border); border-radius:6px; padding:8px 0;">
+        <div class="ln hd">@@ -1,4 +1,5 @@ theme.ts</div>
+        <div class="ln ctx">  keyword: "#ff3d8a",</div>
+        <div class="ln rem">- function: "#22ff66",</div>
+        <div class="ln add">+ function: "#5dff8f",</div>
+        <div class="ln add">+ special:  "#ff5edb",</div>
+        <div class="ln ctx">  string:  "#ffb547",</div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3>UI controls</h3>
+      <div class="ui-row">
+        <button class="btn btn-primary">Install theme</button>
+        <button class="btn btn-secondary">Preview</button>
+        <span class="badge-ui">new</span>
+      </div>
+      <div class="ui-row">
+        <input class="input-ui" placeholder="Search settings…" value="color theme" />
+      </div>
+      <div class="ui-row" style="margin-top:6px; align-items:center; gap:14px; font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--fg-dim);">
+        <span style="color:var(--variable)">▸ link.example.com</span>
+        <span style="color:var(--special)">⌘P</span>
+        <span style="color:var(--fg)">cursor</span><span style="display:inline-block; width:2px; height:14px; background:var(--special); box-shadow:0 0 6px var(--special); vertical-align:middle;"></span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
