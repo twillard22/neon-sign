@@ -130,6 +130,30 @@ source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ```
 
+### Claude Code
+
+Requires Claude Code v2.1.118 or later.
+
+```bash
+# Vivid
+curl -o ~/.claude/themes/neon-sign.json \
+  https://raw.githubusercontent.com/twillard22/neon-sign/main/claude/neon-sign.json
+
+# Muted
+curl -o ~/.claude/themes/neon-sign-muted.json \
+  https://raw.githubusercontent.com/twillard22/neon-sign/main/claude/neon-sign-muted.json
+```
+
+Then select it via `/theme` in Claude Code, or set it directly in `~/.claude/settings.json`:
+
+```json
+{
+  "theme": "custom:neon-sign"
+}
+```
+
+> **Note:** The `custom:` prefix is required — Claude Code uses it to distinguish user-defined themes from built-in presets. Using the bare slug `neon-sign` will silently fall back to the default theme.
+
 ---
 
 ## License
