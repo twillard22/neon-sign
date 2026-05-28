@@ -1,6 +1,6 @@
 # Neon Sign
 
-A cyberpunk-bar color theme for **VS Code**, **Ghostty**, **Starship**, and **zsh**.
+A cyberpunk-bar color theme for **VS Code**, **Ghostty**, **Starship**, **zsh**, and **Claude Code**.
 
 Two variants:
 
