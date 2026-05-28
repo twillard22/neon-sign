@@ -46,13 +46,13 @@
     --cc-inverse:       #08040f;
     --cc-inactive:      #6b5a8a;
     --cc-subtle:        #9a87b8;
-    --cc-suggestion:    #6b5a8a;
+    --cc-suggestion:    #8ad4ff;
     --cc-permission:    #ff5edb;
-    --cc-remember:      #b266ff;
+    --cc-remember:      #c285ff;
     --cc-success:       #5dff8f;
     --cc-error:         #ff4d6d;
     --cc-warning:       #ffb547;
-    --cc-merged:        #b266ff;
+    --cc-merged:        #8b5fdb;
     --cc-prompt-border: #ff3d8a;
     --cc-plan-mode:     #5ee2ff;
     --cc-auto-accept:   #5dff8f;
@@ -65,16 +65,43 @@
     --cc-diff-removed-dim:  #2a151c;
     --cc-diff-added-word:   #2d6b42;
     --cc-diff-removed-word: #6b2d3d;
-    --cc-user-msg:       #170d2c;
-    --cc-user-msg-hover: #2a1a4a;
-    --cc-msg-actions:    #170d2c;
-    --cc-bash-msg:       #1c1136;
-    --cc-memory-msg:     #170d2c;
-    --cc-selection:      #2a1a4a;
+    --cc-user-msg:       #1f1238;
+    --cc-user-msg-hover: #2e1a52;
+    --cc-msg-actions:    #2a1a4a;
+    --cc-bash-msg:       #1f1428;
+    --cc-memory-msg:     #1a1438;
+    --cc-selection:      #4a2870;
     --cc-rate-fill:      #ff3d8a;
     --cc-rate-empty:     #2d1f4d;
     --cc-label-you:      #5ee2ff;
     --cc-label-claude:   #ff3d8a;
+
+    /* Shimmer pairs */
+    --cc-claude-shimmer:        #ff8ab8;
+    --cc-warning-shimmer:       #ffd485;
+    --cc-permission-shimmer:    #ff9bea;
+    --cc-prompt-border-shimmer: #ff8ab8;
+    --cc-inactive-shimmer:      #9a87b8;
+    --cc-fast-mode-shimmer:     #ffa57a;
+
+    /* Subagent colors */
+    --cc-sa-red:    #ff4d6d;
+    --cc-sa-orange: #ff7a3d;
+    --cc-sa-yellow: #ffb547;
+    --cc-sa-green:  #5dff8f;
+    --cc-sa-cyan:   #5ee2ff;
+    --cc-sa-blue:   #4d8aff;
+    --cc-sa-purple: #b266ff;
+    --cc-sa-pink:   #ff5edb;
+
+    /* Rainbow (ultrathink / ultraplan) */
+    --cc-rb-red:    #ff4d6d;
+    --cc-rb-orange: #ff7a3d;
+    --cc-rb-yellow: #ffb547;
+    --cc-rb-green:  #5dff8f;
+    --cc-rb-blue:   #5ee2ff;
+    --cc-rb-indigo: #8a7aff;
+    --cc-rb-violet: #b266ff;
   }
   [data-variant="muted"] {
     --bg-darkest: #161025;
@@ -114,13 +141,13 @@
     --cc-inverse:       #161025;
     --cc-inactive:      #8a7ba8;
     --cc-subtle:        #b8a8d0;
-    --cc-suggestion:    #8a7ba8;
+    --cc-suggestion:    #a4b8e8;
     --cc-permission:    #d090c8;
-    --cc-remember:      #b896d8;
+    --cc-remember:      #c5a4e0;
     --cc-success:       #8de0a5;
     --cc-error:         #e87a8a;
     --cc-warning:       #e8c074;
-    --cc-merged:        #b896d8;
+    --cc-merged:        #9678b8;
     --cc-prompt-border: #e87aa8;
     --cc-plan-mode:     #8fcde0;
     --cc-auto-accept:   #8de0a5;
@@ -133,16 +160,43 @@
     --cc-diff-removed-dim:  #2a1c20;
     --cc-diff-added-word:   #3a6d4a;
     --cc-diff-removed-word: #6d3a44;
-    --cc-user-msg:       #28203f;
-    --cc-user-msg-hover: #3a2f55;
-    --cc-msg-actions:    #28203f;
-    --cc-bash-msg:       #2a2245;
-    --cc-memory-msg:     #28203f;
-    --cc-selection:      #3a2f55;
+    --cc-user-msg:       #332a4d;
+    --cc-user-msg-hover: #473a66;
+    --cc-msg-actions:    #3f3558;
+    --cc-bash-msg:       #352d4f;
+    --cc-memory-msg:     #2d2548;
+    --cc-selection:      #5c4880;
     --cc-rate-fill:      #e87aa8;
     --cc-rate-empty:     #3d3360;
     --cc-label-you:      #8fcde0;
     --cc-label-claude:   #e87aa8;
+
+    /* Shimmer pairs — muted */
+    --cc-claude-shimmer:        #f0a8c5;
+    --cc-warning-shimmer:       #f0d49a;
+    --cc-permission-shimmer:    #e0b5dc;
+    --cc-prompt-border-shimmer: #f0a8c5;
+    --cc-inactive-shimmer:      #b8a8d0;
+    --cc-fast-mode-shimmer:     #f0b598;
+
+    /* Subagent colors — muted */
+    --cc-sa-red:    #e87a8a;
+    --cc-sa-orange: #e89870;
+    --cc-sa-yellow: #e8c074;
+    --cc-sa-green:  #8de0a5;
+    --cc-sa-cyan:   #8fcde0;
+    --cc-sa-blue:   #7d95d8;
+    --cc-sa-purple: #b896d8;
+    --cc-sa-pink:   #d090c8;
+
+    /* Rainbow — muted */
+    --cc-rb-red:    #e87a8a;
+    --cc-rb-orange: #e89870;
+    --cc-rb-yellow: #e8c074;
+    --cc-rb-green:  #8de0a5;
+    --cc-rb-blue:   #8fcde0;
+    --cc-rb-indigo: #a89ad8;
+    --cc-rb-violet: #b896d8;
   }
 
   * { box-sizing: border-box; }
@@ -881,6 +935,56 @@
   .cc-swatch .label { color: var(--cc-text); }
   .cc-swatch .hex { color: var(--cc-subtle); }
 
+  /* Shimmer pairs */
+  .shimmer-row { display: flex; align-items: center; gap: 10px; }
+  .shimmer-pair {
+    width: 56px; height: 18px; border-radius: 4px;
+    background: linear-gradient(90deg, var(--a), var(--b));
+    box-shadow: 0 0 12px var(--a);
+    flex-shrink: 0;
+  }
+  .shimmer-label { color: var(--fg-mid); }
+
+  /* Spinner demo with gradient shimmer */
+  .spinner-demo {
+    color: var(--cc-claude);
+    font-size: 14px;
+    display: inline-block;
+    animation: spin 1.6s linear infinite;
+    text-shadow: 0 0 8px var(--cc-claude);
+  }
+  .spinner-text {
+    background: linear-gradient(90deg, var(--cc-claude) 0%, var(--cc-claude-shimmer) 50%, var(--cc-claude) 100%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: shimmer 2s linear infinite;
+    font-weight: 600;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  @keyframes shimmer { from { background-position: 200% 0; } to { background-position: 0 0; } }
+
+  /* Subagent rows */
+  .sa-row {
+    display: grid;
+    grid-template-columns: 10px 70px 1fr;
+    align-items: center;
+    gap: 10px;
+    padding: 3px 0;
+  }
+  .sa-dot { width: 8px; height: 8px; border-radius: 50%; }
+  .sa-name { font-weight: 600; }
+  .sa-task { color: var(--cc-subtle); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+  /* Rainbow */
+  .rb-arrow { color: var(--cc-prompt-border); margin-right: 4px; }
+  .rb-text { font-weight: 700; }
+  .rb-shimmer { animation: rb-pulse 2.4s ease-in-out infinite; }
+  @keyframes rb-pulse { 0%, 100% { filter: brightness(1); } 50% { filter: brightness(1.35); } }
+  .rb-chip { height: 14px; border-radius: 3px; }
+
   /* Variant toggle */
   .variant-toggle {
     position: fixed;
@@ -1278,6 +1382,56 @@
         <div class="cc-swatch"><span class="chip" style="background:var(--cc-diff-removed-word)"></span><span class="label">diffRemovedWord</span><span class="hex">remove word</span></div>
         <div class="cc-swatch"><span class="chip" style="background:var(--cc-rate-fill)"></span><span class="label">rate_limit_fill</span><span class="hex">progress</span></div>
         <div class="cc-swatch"><span class="chip" style="background:var(--cc-rate-empty)"></span><span class="label">rate_limit_empty</span><span class="hex">track</span></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3>Shimmer pairs</h3>
+      <div style="display:flex; flex-direction:column; gap:6px; font-family:'JetBrains Mono',monospace; font-size:10.5px;">
+        <div class="shimmer-row"><span class="shimmer-pair" style="--a:var(--cc-claude); --b:var(--cc-claude-shimmer);"></span><span class="shimmer-label">claude · claudeShimmer</span></div>
+        <div class="shimmer-row"><span class="shimmer-pair" style="--a:var(--cc-warning); --b:var(--cc-warning-shimmer);"></span><span class="shimmer-label">warning · warningShimmer</span></div>
+        <div class="shimmer-row"><span class="shimmer-pair" style="--a:var(--cc-permission); --b:var(--cc-permission-shimmer);"></span><span class="shimmer-label">permission · permissionShimmer</span></div>
+        <div class="shimmer-row"><span class="shimmer-pair" style="--a:var(--cc-prompt-border); --b:var(--cc-prompt-border-shimmer);"></span><span class="shimmer-label">promptBorder · ··Shimmer</span></div>
+        <div class="shimmer-row"><span class="shimmer-pair" style="--a:var(--cc-inactive); --b:var(--cc-inactive-shimmer);"></span><span class="shimmer-label">inactive · inactiveShimmer</span></div>
+        <div class="shimmer-row"><span class="shimmer-pair" style="--a:var(--cc-fast-mode); --b:var(--cc-fast-mode-shimmer);"></span><span class="shimmer-label">fastMode · fastModeShimmer</span></div>
+      </div>
+      <div style="margin-top:12px; padding:10px 12px; background:var(--bg-darkest); border:1px solid var(--border); border-radius:6px; font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--cc-subtle);">
+        <span class="spinner-demo">✻</span> <span class="spinner-text">Thinking…</span>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3>Subagents · 8 colors</h3>
+      <div style="display:flex; flex-direction:column; gap:4px; font-family:'JetBrains Mono',monospace; font-size:11px;">
+        <div class="sa-row"><span class="sa-dot" style="background:var(--cc-sa-red); box-shadow:0 0 6px var(--cc-sa-red);"></span><span class="sa-name" style="color:var(--cc-sa-red)">scout-1</span><span class="sa-task">grep auth tokens across src/</span></div>
+        <div class="sa-row"><span class="sa-dot" style="background:var(--cc-sa-orange); box-shadow:0 0 6px var(--cc-sa-orange);"></span><span class="sa-name" style="color:var(--cc-sa-orange)">scout-2</span><span class="sa-task">read package.json + tsconfig</span></div>
+        <div class="sa-row"><span class="sa-dot" style="background:var(--cc-sa-yellow); box-shadow:0 0 6px var(--cc-sa-yellow);"></span><span class="sa-name" style="color:var(--cc-sa-yellow)">scout-3</span><span class="sa-task">inspect ghostty/themes/</span></div>
+        <div class="sa-row"><span class="sa-dot" style="background:var(--cc-sa-green); box-shadow:0 0 6px var(--cc-sa-green);"></span><span class="sa-name" style="color:var(--cc-sa-green)">builder</span><span class="sa-task">generate muted variant JSON</span></div>
+        <div class="sa-row"><span class="sa-dot" style="background:var(--cc-sa-cyan); box-shadow:0 0 6px var(--cc-sa-cyan);"></span><span class="sa-name" style="color:var(--cc-sa-cyan)">linter</span><span class="sa-task">validate token names</span></div>
+        <div class="sa-row"><span class="sa-dot" style="background:var(--cc-sa-blue); box-shadow:0 0 6px var(--cc-sa-blue);"></span><span class="sa-name" style="color:var(--cc-sa-blue)">tester</span><span class="sa-task">snapshot ANSI samples</span></div>
+        <div class="sa-row"><span class="sa-dot" style="background:var(--cc-sa-purple); box-shadow:0 0 6px var(--cc-sa-purple);"></span><span class="sa-name" style="color:var(--cc-sa-purple)">scribe</span><span class="sa-task">draft README delta</span></div>
+        <div class="sa-row"><span class="sa-dot" style="background:var(--cc-sa-pink); box-shadow:0 0 6px var(--cc-sa-pink);"></span><span class="sa-name" style="color:var(--cc-sa-pink)">packager</span><span class="sa-task">build .vsix bundle</span></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <h3>Rainbow · ultrathink</h3>
+      <div style="font-family:'JetBrains Mono',monospace; font-size:13px; padding:8px 12px; background:var(--bg-darkest); border:1px solid var(--border); border-radius:6px; letter-spacing:0.01em;">
+        <span class="rb-arrow">❯</span>
+        <span class="rb-text rb-shimmer"><span style="color:var(--cc-rb-red)">u</span><span style="color:var(--cc-rb-orange)">l</span><span style="color:var(--cc-rb-yellow)">t</span><span style="color:var(--cc-rb-green)">r</span><span style="color:var(--cc-rb-blue)">a</span><span style="color:var(--cc-rb-indigo)">t</span><span style="color:var(--cc-rb-violet)">h</span><span style="color:var(--cc-rb-red)">i</span><span style="color:var(--cc-rb-orange)">n</span><span style="color:var(--cc-rb-yellow)">k</span></span>
+        <span style="color:var(--cc-text)"> rewrite the diff logic from scratch</span>
+      </div>
+      <div style="margin-top:10px; display:grid; grid-template-columns:repeat(7, 1fr); gap:4px;">
+        <div class="rb-chip" style="background:var(--cc-rb-red); box-shadow:0 0 8px var(--cc-rb-red);"></div>
+        <div class="rb-chip" style="background:var(--cc-rb-orange); box-shadow:0 0 8px var(--cc-rb-orange);"></div>
+        <div class="rb-chip" style="background:var(--cc-rb-yellow); box-shadow:0 0 8px var(--cc-rb-yellow);"></div>
+        <div class="rb-chip" style="background:var(--cc-rb-green); box-shadow:0 0 8px var(--cc-rb-green);"></div>
+        <div class="rb-chip" style="background:var(--cc-rb-blue); box-shadow:0 0 8px var(--cc-rb-blue);"></div>
+        <div class="rb-chip" style="background:var(--cc-rb-indigo); box-shadow:0 0 8px var(--cc-rb-indigo);"></div>
+        <div class="rb-chip" style="background:var(--cc-rb-violet); box-shadow:0 0 8px var(--cc-rb-violet);"></div>
+      </div>
+      <div style="margin-top:6px; display:grid; grid-template-columns:repeat(7, 1fr); gap:4px; font-family:'JetBrains Mono',monospace; font-size:9px; color:var(--fg-dim); text-align:center;">
+        <span>red</span><span>org</span><span>ylw</span><span>grn</span><span>blu</span><span>ind</span><span>vlt</span>
       </div>
     </div>
 
